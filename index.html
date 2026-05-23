@@ -1306,7 +1306,7 @@
       <div id="clientForm">
         <h3>Let's talk</h3>
         <p class="subtitle">Tell us what you're looking for and we'll get back within 24 hours.</p>
-        <form onsubmit="handleSubmit(event,'client')">
+        <form>
           <div class="form-row">
             <div class="form-group">
               <label>Your name</label>
@@ -1351,7 +1351,7 @@
       <div id="engineerForm">
         <h3>Join our network</h3>
         <p class="subtitle">Fill in your details and upload your CV — we'll handle the rest.</p>
-        <form onsubmit="handleSubmit(event,'engineer')">
+        <form>
           <div class="form-row">
             <div class="form-group">
               <label>First name</label>
@@ -1417,6 +1417,9 @@
     </div>
   </div>
 
+  <!-- ─── SUPABASE FORM HANDLING ─── -->
+  <script type="module" src="/src/main.js"></script>
+
   <!-- ─── SCRIPTS ─── -->
   <script>
     // ── Scroll reveal ──
@@ -1474,12 +1477,6 @@
 
     function closeOnOverlay(e, id) {
       if (e.target === e.currentTarget) closeModal(id);
-    }
-
-    function handleSubmit(e, type) {
-      e.preventDefault();
-      document.getElementById(type + 'Form').style.display = 'none';
-      document.getElementById(type + 'Success').classList.add('show');
     }
 
     document.addEventListener('keydown', function(e) {
