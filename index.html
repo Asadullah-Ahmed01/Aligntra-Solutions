@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligntra Solutions — Recruitment That Fits</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink: #0B0B0D;
+      --blue-core: #1F5FC2;
+      --blue-deep: #163D7A;
+      --blue-light: #6AACF7;
+      --teal: #1EC8A4;
+      --off-white: #F4F5F8;
+      --grey-mid: #9AA3B8;
+      --grey-bg: #ECEEF2;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--grey-bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ─── REVEAL ANIMATION ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(236,238,242,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(154,163,184,0.15);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav.scrolled { box-shadow: 0 1px 12px rgba(11,11,13,0.06); }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--teal); }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+
+    .nav-links a {
+      color: var(--grey-mid);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      background: var(--blue-core) !important;
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      font-size: 13px !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--blue-deep) !important; }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .mobile-toggle svg { width: 24px; height: 24px; color: var(--ink); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 160px 40px 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-grid {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 320px;
+      background-image:
+        linear-gradient(rgba(154,163,184,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(154,163,184,0.12) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 300px 160px at 50% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 300px 160px at 50% 50%, black 20%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px 6px 8px;
+      background: var(--white);
+      border-radius: 100px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--grey-mid);
+      margin-bottom: 28px;
+      border: 1px solid rgba(154,163,184,0.2);
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--ink);
+      margin-bottom: 20px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--blue-core);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--grey-mid);
+      max-width: 460px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--blue-core);
+      color: var(--white);
+    }
+
+    .btn-primary:hover { box-shadow: 0 6px 20px rgba(31,95,194,0.25); }
+
+    .btn-outline {
+      background: var(--white);
+      color: var(--ink);
+      border: 1.5px solid rgba(154,163,184,0.3);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .btn svg { width: 16px; height: 16px; }
+
+    /* ─── STATS BAR ─── */
+    .stats {
+      padding: 10px 40px 60px;
+    }
+
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(154,163,184,0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      background: var(--white);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+
+    .stat-num.blue { color: var(--blue-core); }
+    .stat-num.teal { color: var(--teal); }
+    .stat-num.light { color: var(--blue-light); }
+    .stat-num.ink { color: var(--ink); }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--grey-mid);
+      font-weight: 500;
+    }
+
+    /* ─── PATH CARDS ─── */
+    .paths-section { padding: 60px 0 80px; }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--grey-mid);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .paths {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px 32px;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+      border: 1.5px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover::before { opacity: 1; }
+    .card.client::before { background: linear-gradient(90deg, var(--blue-core), var(--blue-light)); }
+    .card.engineer::before { background: linear-gradient(90deg, var(--teal), #4de8c8); }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(11,11,13,0.07);
+    }
+
+    .card h2 {
+      font-size: 21px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card > p {
+      font-size: 14.5px;
+      color: var(--grey-mid);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: gap 0.25s;
+    }
+
+    .card:hover .card-link { gap: 14px; }
+    .card.client .card-link { color: var(--blue-core); }
+    .card.engineer .card-link { color: var(--teal); }
+    .card-link svg { width: 15px; height: 15px; }
+
+    /* ─── WHY SECTION ─── */
+    .why-section { padding: 80px 0; }
+
+    .why-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .why-left .section-sub {
+      max-width: 380px;
+    }
+
+    .why-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .why-point {
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(154,163,184,0.18);
+    }
+
+    .why-point:first-child { padding-top: 0; }
+    .why-point:last-child { border-bottom: none; }
+
+    .why-point h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .why-point p {
+      font-size: 14px;
+      color: var(--grey-mid);
+      line-height: 1.65;
+    }
+
+    /* ─── PROCESS SECTION ─── */
+    .process-section {
+      padding: 80px 0;
+    }
+
+    .process-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .process-header .section-sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      position: relative;
+    }
+
+    .process-line {
+      display: none;
+    }
+
+    .process-step {
+      text-align: center;
+      padding: 28px 16px;
+      position: relative;
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 auto 18px;
+      color: var(--white);
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-num.s1 { background: var(--blue-core); }
+    .step-num.s2 { background: var(--blue-light); }
+    .step-num.s3 { background: var(--teal); }
+    .step-num.s4 { background: var(--ink); }
+
+    .process-step h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .process-step p {
+      font-size: 13px;
+      color: var(--grey-mid);
+      line-height: 1.55;
+    }
+
+    .step-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 24px;
+    }
+
+    .step-connector svg { width: 20px; height: 20px; color: var(--grey-mid); opacity: 0.4; }
+
+    /* ─── TESTIMONIAL / TRUST STRIP ─── */
+    .trust-section {
+      padding: 60px 0 80px;
+    }
+
+    .trust-card {
+      background: var(--ink);
+      border-radius: 20px;
+      padding: 56px 60px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trust-card::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      background: var(--blue-core);
+      border-radius: 50%;
+      opacity: 0.12;
+    }
+
+    .trust-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 160px;
+      height: 160px;
+      background: var(--teal);
+      border-radius: 50%;
+      opacity: 0.08;
+    }
+
+    .trust-quote {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.5;
+      max-width: 600px;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .trust-quote::before {
+      content: '\201C';
+      position: absolute;
+      top: -20px;
+      left: -8px;
+      font-size: 64px;
+      color: var(--teal);
+      opacity: 0.4;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .trust-author {
+      position: relative;
+      z-index: 1;
+    }
+
+    .trust-author strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .trust-author span {
+      font-size: 13px;
+      color: var(--grey-mid);
+    }
+
+    /* ─── FAQ SECTION ─── */
+    .faq-section { padding: 80px 0 100px; }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .faq-header .section-sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+
+    .faq-item:hover { box-shadow: 0 4px 16px rgba(11,11,13,0.04); }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      cursor: pointer;
+      gap: 16px;
+      user-select: none;
+    }
+
+    .faq-q h4 {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .faq-toggle {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--off-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .faq-toggle svg { width: 14px; height: 14px; color: var(--grey-mid); }
+
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+      background: var(--teal);
+    }
+
+    .faq-item.open .faq-toggle svg { color: var(--white); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1), padding 0.35s;
+      padding: 0 24px;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding: 0 24px 22px;
+    }
+
+    .faq-a p {
+      font-size: 14px;
+      color: var(--grey-mid);
+      line-height: 1.65;
+    }
+
+    /* ─── CTA BANNER ─── */
+    .cta-section { padding: 0 0 80px; }
+
+    .cta-card {
+      background: linear-gradient(135deg, var(--blue-core) 0%, var(--blue-deep) 100%);
+      border-radius: 20px;
+      padding: 56px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 280px;
+      height: 280px;
+      border: 2px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      bottom: -120px;
+      right: 60px;
+      width: 240px;
+      height: 240px;
+      border: 2px solid rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .cta-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-text h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .cta-text p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--blue-core);
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.18);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      border-top: 1px solid rgba(154,163,184,0.2);
+      padding: 48px 0 40px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand .logo {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--grey-mid);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .footer-col h5 {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13.5px;
+      color: var(--grey-mid);
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--ink); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(154,163,184,0.15);
+    }
+
+    .footer-bottom p {
+      font-size: 12.5px;
+      color: var(--grey-mid);
+    }
+
+    .footer-bottom a {
+      font-size: 12.5px;
+      color: var(--grey-mid);
+      text-decoration: none;
+      margin-left: 20px;
+      transition: color 0.2s;
+    }
+
+    .footer-bottom a:hover { color: var(--ink); }
+
+    /* ─── MODALS ─── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11,11,13,0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .overlay.active { display: flex; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 44px 40px;
+      position: relative;
+      animation: modalIn 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: var(--off-white);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover { background: var(--grey-bg); }
+    .modal-close svg { width: 15px; height: 15px; color: var(--grey-mid); }
+
+    .modal h3 {
+      font-size: 23px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .modal .subtitle {
+      font-size: 14px;
+      color: var(--grey-mid);
+      margin-bottom: 26px;
+    }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--grey-bg);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--off-white);
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-core);
+      background: var(--white);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group input[type="file"] {
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+
+    .form-group input[type="file"]::file-selector-button {
+      background: var(--blue-core);
+      color: var(--white);
+      border: none;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--white);
+      cursor: pointer;
+      margin-top: 6px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .submit-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+    .submit-btn.blue { background: var(--blue-core); }
+    .submit-btn.teal { background: var(--teal); }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    .success-msg.show { display: block; }
+
+    .success-msg .check-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .success-msg .check-circle.blue { background: rgba(31,95,194,0.1); }
+    .success-msg .check-circle.teal { background: rgba(30,200,164,0.1); }
+    .success-msg .check-circle svg { width: 26px; height: 26px; }
+
+    .success-msg h4 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .success-msg p {
+      font-size: 14px;
+      color: var(--grey-mid);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .why-split { grid-template-columns: 1fr; gap: 36px; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .cta-card { flex-direction: column; align-items: flex-start; padding: 40px 36px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 680px) {
+      .container { padding: 0 20px; }
+      .nav-inner { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        padding: 20px;
+        gap: 16px;
+        border-bottom: 1px solid rgba(154,163,184,0.15);
+      }
+      .mobile-toggle { display: block; }
+      .hero { padding: 120px 20px 60px; }
+      .hero h1 { font-size: 36px; }
+      .hero-sub { font-size: 15px; }
+      .paths { grid-template-columns: 1fr; }
+      .why-split { grid-template-columns: 1fr; gap: 28px; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .section-title { font-size: 28px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-num { font-size: 26px; }
+      .trust-card { padding: 36px 28px; }
+      .trust-quote { font-size: 18px; }
+      .cta-card { padding: 32px 24px; }
+      .cta-text h2 { font-size: 22px; }
+      .cta-btns { flex-direction: column; width: 100%; }
+      .btn-white, .btn-ghost { text-align: center; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+      .modal { padding: 32px 22px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">aligntra<span>.</span></a>
+      <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="nav-links">
+        <a href="#why">Why Us</a>
+        <a href="#process">How It Works</a>
+        <a href="#faq">FAQs</a>
+        <a href="#" class="nav-cta" onclick="openModal('client')">Hire Talent</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="reveal">
+      <div class="hero-badge"><span class="dot"></span> Currently placing across 12 countries</div>
+    </div>
+    <h1 class="reveal reveal-d1">The right <em>engineer</em> for the right team.</h1>
+    <p class="hero-sub reveal reveal-d2">Aligntra Solutions is a recruitment partner built for tech. We match skilled engineers with companies that actually need them.</p>
+    <div class="hero-btns reveal reveal-d3">
+      <button class="btn btn-primary" onclick="openModal('client')">
+        I'm hiring
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </button>
+      <button class="btn btn-outline" onclick="openModal('engineer')">
+        I'm an engineer
+      </button>
+    </div>
+  </section>
+
+  <!-- ─── STATS ─── -->
+  <section class="stats">
+    <div class="stats-inner reveal">
+      <div class="stat-item">
+        <div class="stat-num blue" data-target="340" data-suffix="+">0</div>
+        <div class="stat-label">Engineers placed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num teal" data-target="96" data-suffix="%">0</div>
+        <div class="stat-label">Retention at 12 months</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num light" data-target="18" data-suffix=" days">0</div>
+        <div class="stat-label">Avg. time to hire</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num ink" data-target="12" data-suffix="">0</div>
+        <div class="stat-label">Countries served</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PATH CARDS ─── -->
+  <section class="paths-section" id="paths">
+    <div class="container">
+      <div class="section-label reveal">Get started</div>
+      <div class="section-title reveal reveal-d1">Which side are you on?</div>
+      <p class="section-sub reveal reveal-d2">Whether you're building a team or looking for your next role, we've got a clear path for you.</p>
+      <div class="paths">
+        <div class="card client reveal reveal-d2" onclick="openModal('client')">
+          <h2>I'm hiring engineers</h2>
+          <p>Tell us what your team needs. We'll screen, vet, and present candidates that actually fit your stack and culture.</p>
+          <div class="card-link">Get in touch <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+        <div class="card engineer reveal reveal-d3" onclick="openModal('engineer')">
+          <h2>I'm looking for work</h2>
+          <p>Submit your profile and get matched with companies hiring for your exact skills. No spam, no guesswork.</p>
+          <div class="card-link">Join our network <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHY SECTION ─── -->
+  <section class="why-section" id="why">
+    <div class="container">
+      <div class="why-split">
+        <div class="why-left reveal">
+          <div class="section-label">Why Aligntra</div>
+          <div class="section-title">Recruitment, minus the runaround</div>
+          <p class="section-sub" style="margin-bottom:0">We built our process around one idea: people aren't keywords. Most agencies spray CVs and hope. We actually learn your stack, your team dynamics, and what "good" looks like for you — then go find it.</p>
+        </div>
+        <div class="why-right">
+          <div class="why-point reveal">
+            <h3>Vetted, not scraped</h3>
+            <p>Every engineer in our network has been technically assessed and interviewed. We don't send you a pile of resumes — we send you three people worth talking to.</p>
+          </div>
+          <div class="why-point reveal reveal-d1">
+            <h3>Culture fit is non-negotiable</h3>
+            <p>Technical skill is table stakes. We also look at communication style, work preferences, and whether someone will actually thrive on your team — not just survive.</p>
+          </div>
+          <div class="why-point reveal reveal-d2">
+            <h3>We stay involved after the hire</h3>
+            <p>Our job doesn't end at placement. We check in at 30, 60, and 90 days. If something's off, we fix it — including a replacement guarantee.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROCESS SECTION ─── -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <div class="process-header">
+        <div class="section-label reveal">How it works</div>
+        <div class="section-title reveal reveal-d1">Four steps to your next hire</div>
+        <p class="section-sub reveal reveal-d2">A simple, repeatable process that respects your time.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <div class="step-num s1">1</div>
+          <h4>Tell us what you need</h4>
+          <p>Share your requirements — role, stack, seniority, timeline. A quick call or a form is all it takes.</p>
+        </div>
+        <div class="process-step reveal reveal-d1">
+          <div class="step-num s2">2</div>
+          <h4>We search our network</h4>
+          <p>We match your brief against our pre-vetted talent pool and actively source where needed.</p>
+        </div>
+        <div class="process-step reveal reveal-d2">
+          <div class="step-num s3">3</div>
+          <h4>Review shortlisted profiles</h4>
+          <p>You receive a curated shortlist with skill breakdowns, availability, and culture-fit notes.</p>
+        </div>
+        <div class="process-step reveal reveal-d3">
+          <div class="step-num s4">4</div>
+          <h4>Interview and hire</h4>
+          <p>We coordinate interviews, handle logistics, and support offer negotiation through to day one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIAL ─── -->
+  <section class="trust-section">
+    <div class="container">
+      <div class="trust-card reveal">
+        <div class="trust-quote">Aligntra understood our stack from the first conversation. Within two weeks we had three senior engineers interviewing — all of them were strong. That kind of hit rate is rare.</div>
+        <div class="trust-author">
+          <strong>Daniel Hofer</strong>
+          <span>VP Engineering, Prolytik</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="faq-header">
+        <div class="section-label reveal">FAQs</div>
+        <div class="section-title reveal reveal-d1">Common questions</div>
+        <p class="section-sub reveal reveal-d2">If your question isn't here, reach out — we're happy to talk.</p>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>What types of engineering roles do you fill?</h4>
+            <div class="faq-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 5v14m-7-7h14"/></svg></div>
+          </div>
+          <div class="faq-a"><p>Frontend, backend, full-stack, DevOps, data engineering, ML, mobile, QA, and security. We focus exclusively on technical roles across all seniority levels.</p></div>
+        </div>
+
+        <div class="faq-item reveal reveal-d1">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>How do you vet your engineers?</h4>
+            <div class="faq-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 5v14m-7-7h14"/></svg></div>
+          </div>
+          <div class="faq-a"><p>Every candidate goes through a technical screening, a portfolio or work-history review, and a communication assessment. We only put forward engineers we'd hire ourselves.</p></div>
+        </div>
+
+        <div class="faq-item reveal reveal-d2">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>What does it cost to work with Aligntra?</h4>
+            <div class="faq-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 5v14m-7-7h14"/></svg></div>
+          </div>
+          <div class="faq-a"><p>For clients, we work on a success-based model — you only pay when you hire someone through us. Engineers pay nothing. Reach out and we'll walk you through the specifics.</p></div>
+        </div>
+
+        <div class="faq-item reveal reveal-d3">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>I'm an engineer — how long until I hear back?</h4>
+            <div class="faq-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 5v14m-7-7h14"/></svg></div>
+          </div>
+          <div class="faq-a"><p>We review every submission within 3 business days. If your profile matches an open role, we'll reach out to schedule a quick intro call. Otherwise, you'll stay in our network for future matches.</p></div>
+        </div>
+
+        <div class="faq-item reveal reveal-d4">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>Do you support remote and international placements?</h4>
+            <div class="faq-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 5v14m-7-7h14"/></svg></div>
+          </div>
+          <div class="faq-a"><p>Yes. We place engineers across 12 countries and work with fully remote, hybrid, and on-site setups. We handle timezone coordination and compliance considerations.</p></div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h4>What happens if a placement doesn't work out?</h4>
+            <div class="faq-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 5v14m-7-7h14"/></svg></div>
+          </div>
+          <div class="faq-a"><p>We offer a replacement guarantee. If a hire doesn't work out within the guarantee period, we'll find a replacement at no additional cost.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA BANNER ─── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card reveal">
+        <div class="cta-text">
+          <h2>Ready to get started?</h2>
+          <p>Whether you're hiring or looking, we'd like to hear from you.</p>
+        </div>
+        <div class="cta-btns">
+          <button class="btn-white" onclick="openModal('client')">Hire engineers</button>
+          <button class="btn-ghost" onclick="openModal('engineer')">Submit your profile</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="logo">aligntra<span>.</span></div>
+          <p>A recruitment agency built for tech. Connecting skilled engineers with companies that need them.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="#why">Why Us</a>
+          <a href="#process">How It Works</a>
+          <a href="#faq">FAQs</a>
+        </div>
+        <div class="footer-col">
+          <h5>For Clients</h5>
+          <a href="#" onclick="openModal('client')">Hire Engineers</a>
+          <a href="#" onclick="openModal('client')">Contact Sales</a>
+        </div>
+        <div class="footer-col">
+          <h5>For Engineers</h5>
+          <a href="#" onclick="openModal('engineer')">Join Network</a>
+          <a href="#" onclick="openModal('engineer')">Submit CV</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aligntra Solutions. All rights reserved.</p>
+        <div>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── CLIENT MODAL ─── -->
+  <div class="overlay" id="clientOverlay" onclick="closeOnOverlay(event,'clientOverlay')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('clientOverlay')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div id="clientForm">
+        <h3>Let's talk</h3>
+        <p class="subtitle">Tell us what you're looking for and we'll get back within 24 hours.</p>
+        <form onsubmit="handleSubmit(event,'client')">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your name</label>
+              <input type="text" placeholder="Jane Smith" required>
+            </div>
+            <div class="form-group">
+              <label>Company</label>
+              <input type="text" placeholder="Acme Corp" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Work email</label>
+            <input type="email" placeholder="jane@acme.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone (optional)</label>
+            <input type="tel" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label>What roles are you looking to fill?</label>
+            <textarea placeholder="e.g. 2 senior backend engineers with Go and distributed systems experience, starting Q3..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn blue">Send message</button>
+        </form>
+      </div>
+      <div class="success-msg" id="clientSuccess">
+        <div class="check-circle blue">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--blue-core)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h4>Message sent</h4>
+        <p>We'll be in touch within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ENGINEER MODAL ─── -->
+  <div class="overlay" id="engineerOverlay" onclick="closeOnOverlay(event,'engineerOverlay')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('engineerOverlay')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div id="engineerForm">
+        <h3>Join our network</h3>
+        <p class="subtitle">Fill in your details and upload your CV — we'll handle the rest.</p>
+        <form onsubmit="handleSubmit(event,'engineer')">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First name</label>
+              <input type="text" placeholder="Alex" required>
+            </div>
+            <div class="form-group">
+              <label>Last name</label>
+              <input type="text" placeholder="Johnson" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="alex@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Primary skill</label>
+              <select required>
+                <option value="" disabled selected>Select...</option>
+                <option>Frontend</option>
+                <option>Backend</option>
+                <option>Full-Stack</option>
+                <option>DevOps / Cloud</option>
+                <option>Data / ML</option>
+                <option>Mobile</option>
+                <option>QA / Testing</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Years of experience</label>
+              <select required>
+                <option value="" disabled selected>Select...</option>
+                <option>0 – 2</option>
+                <option>3 – 5</option>
+                <option>6 – 10</option>
+                <option>10+</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload CV</label>
+            <input type="file" accept=".pdf,.doc,.docx">
+          </div>
+          <div class="form-group">
+            <label>Anything else we should know?</label>
+            <textarea placeholder="Preferred location, salary range, availability, tech you love working with..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn teal">Submit application</button>
+        </form>
+      </div>
+      <div class="success-msg" id="engineerSuccess">
+        <div class="check-circle teal">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--teal)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h4>Application received</h4>
+        <p>We'll review your profile and reach out with matching opportunities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SCRIPTS ─── -->
+  <script>
+    // ── Scroll reveal ──
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // ── Nav scroll shadow ──
+    window.addEventListener('scroll', function() {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ── Stat counter animation ──
+    var statsDone = false;
+    var statsObserver = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !statsDone) {
+        statsDone = true;
+        document.querySelectorAll('.stat-num').forEach(function(el) {
+          var target = parseInt(el.getAttribute('data-target'));
+          var suffix = el.getAttribute('data-suffix') || '';
+          var duration = 1600;
+          var start = performance.now();
+          function tick(now) {
+            var progress = Math.min((now - start) / duration, 1);
+            var ease = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * ease) + suffix;
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      }
+    }, { threshold: 0.3 });
+
+    var statsEl = document.querySelector('.stats-inner');
+    if (statsEl) statsObserver.observe(statsEl);
+
+    // ── Modal functions ──
+    function openModal(type) {
+      document.getElementById(type + 'Overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeOnOverlay(e, id) {
+      if (e.target === e.currentTarget) closeModal(id);
+    }
+
+    function handleSubmit(e, type) {
+      e.preventDefault();
+      document.getElementById(type + 'Form').style.display = 'none';
+      document.getElementById(type + 'Success').classList.add('show');
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.overlay.active').forEach(function(o) {
+          o.classList.remove('active');
+        });
+        document.body.style.overflow = '';
+      }
+    });
+
+    // ── FAQ accordion ──
+    function toggleFaq(btn) {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // ── Close mobile nav on link click ──
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
