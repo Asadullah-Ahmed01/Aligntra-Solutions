@@ -78,14 +78,16 @@
     }
 
     .logo {
-      font-size: 21px;
-      font-weight: 800;
-      color: var(--ink);
-      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
       text-decoration: none;
     }
 
-    .logo span { color: var(--teal); }
+    .logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
 
     .nav-links { display: flex; align-items: center; gap: 28px; }
 
@@ -756,9 +758,12 @@
     }
 
     .footer-brand .logo {
-      display: inline-block;
+      display: inline-flex;
       margin-bottom: 12px;
-      font-size: 20px;
+    }
+
+    .footer-brand .logo img {
+      height: 36px;
     }
 
     .footer-brand p {
@@ -1036,7 +1041,7 @@
   <!-- ─── NAV ─── -->
   <header class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="logo">aligntra<span>.</span></a>
+      <a href="#" class="logo"><img src="/logo.png" alt="Aligntra Solutions"></a>
       <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
@@ -1267,7 +1272,7 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <div class="logo">aligntra<span>.</span></div>
+          <div class="logo"><img src="/logo.png" alt="Aligntra Solutions"></div>
           <p>A recruitment agency built for tech. Connecting skilled engineers with companies that need them.</p>
         </div>
         <div class="footer-col">
