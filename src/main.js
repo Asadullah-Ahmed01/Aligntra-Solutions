@@ -6,6 +6,9 @@ const EMOJI_REGEX = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\
 
 const MAX_TEXT = 500;
 const MAX_MESSAGE = 2000;
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+
 const ALLOWED_CV_TYPES = [
   'application/pdf',
   'application/msword',
@@ -49,7 +52,7 @@ function validateTextField(value, fieldName, maxLen) {
 }
 
 function validateCvFile(file) {
-  if (!file) return null; // CV is optional
+  if (!file) return null;
 
   const name = file.name.toLowerCase();
   const ext = name.substring(name.lastIndexOf('.'));
@@ -63,6 +66,45 @@ function validateCvFile(file) {
   }
 
   return null;
+}
+
+
+// ── Rate limiting ──
+
+function getClientKey() {
+  let key = localStorage.getItem('aligntra_client_key');
+  if (!key) {
+    key = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+    localStorage.setItem('aligntra_client_key', key);
+  }
+  return key;
+}
+
+async function checkRateLimit(formType) {
+  const clientKey = getClientKey();
+  const oneHourAgo = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString();
+
+  const { count, error } = await supabase
+    .from('submission_log')
+    .select('*', { count: 'exact', head: true })
+    .eq('form_type', formType)
+    .eq('client_key', clientKey)
+    .gte('created_at', oneHourAgo);
+
+  if (error) {
+    console.error('Rate limit check error:', error);
+    return false; // allow on error to not block users
+  }
+
+  return count >= RATE_LIMIT_MAX;
+}
+
+async function logSubmission(formType) {
+  const clientKey = getClientKey();
+  await supabase.from('submission_log').insert([{
+    form_type: formType,
+    client_key: clientKey,
+  }]);
 }
 
 
@@ -97,6 +139,13 @@ if (clientForm) {
       return;
     }
 
+    // Rate limit check
+    const isLimited = await checkRateLimit('client');
+    if (isLimited) {
+      showError('clientError', "You've submitted this form a few times recently. Please wait an hour before trying again.");
+      return;
+    }
+
     // Strip emojis from all fields before sending
     const payload = {
       name: stripEmojis(raw.name),
@@ -120,6 +169,7 @@ if (clientForm) {
       return;
     }
 
+    await logSubmission('client');
     document.getElementById('clientForm').style.display = 'none';
     document.getElementById('clientSuccess').classList.add('show');
   });
@@ -171,6 +221,13 @@ if (engineerForm) {
       return;
     }
 
+    // Rate limit check
+    const isLimited = await checkRateLimit('engineer');
+    if (isLimited) {
+      showError('engineerError', "You've submitted this form a few times recently. Please wait an hour before trying again.");
+      return;
+    }
+
     const submitBtn = engineerForm.querySelector('.submit-btn');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting...';
@@ -195,11 +252,8 @@ if (engineerForm) {
         return;
       }
 
-      const { data: urlData } = supabase.storage
-        .from('cvs')
-        .getPublicUrl(filePath);
-
-      cvUrl = urlData.publicUrl;
+      // Bucket is private — store the file path, not a public URL
+      cvUrl = filePath;
     }
 
     // Strip emojis from all text fields before sending
@@ -226,6 +280,7 @@ if (engineerForm) {
       return;
     }
 
+    await logSubmission('engineer');
     document.getElementById('engineerForm').style.display = 'none';
     document.getElementById('engineerSuccess').classList.add('show');
   });
