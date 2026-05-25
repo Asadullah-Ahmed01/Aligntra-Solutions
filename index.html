@@ -80,9 +80,16 @@
       display: flex;
       align-items: center;
       text-decoration: none;
+      gap: 0;
     }
 
     .logo img {
+      height: 90px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-text {
       height: 90px;
       width: auto;
       display: block;
@@ -1110,7 +1117,7 @@
   <!-- ─── NAV ─── -->
   <header class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="logo"><img src="/logo.png" alt="Aligntra Solutions"></a>
+      <a href="#" class="logo"><img src="/logo.png" alt="Aligntra Solutions"><img src="/logo-text.png" alt="" class="logo-text"></a>
       <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
