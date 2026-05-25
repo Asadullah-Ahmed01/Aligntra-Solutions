@@ -823,6 +823,57 @@
 
     .footer-bottom a:hover { color: var(--ink); }
 
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .footer-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--off-white);
+      color: var(--grey-mid);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .footer-socials a:hover {
+      background: var(--blue-core);
+      color: var(--white);
+    }
+
+    .footer-socials a svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-contact {
+      margin-top: 12px;
+    }
+
+    .footer-contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--grey-mid);
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--ink); }
+
+    .footer-contact a svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
     /* ─── MODALS ─── */
     .overlay {
       display: none;
@@ -1279,6 +1330,16 @@
         <div class="footer-brand">
           <div class="logo"><img src="/logo.png" alt="Aligntra Solutions"></div>
           <p>A recruitment agency built for tech. Connecting skilled engineers with companies that need them.</p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/aligntra?igsh=MTl4b2IxZTBwdjRiMw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://www.facebook.com/share/1EJcS39erE/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://www.linkedin.com/company/aligntra/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            <a href="https://youtube.com/@aligntra?si=1SYNl8QDgwtYCVSi" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+          </div>
+          <div class="footer-contact">
+            <a href="tel:+923271937933"><i data-lucide="phone"></i> +92 327 1937933</a><br>
+            <a href="mailto:aligntrarecruiters@gmail.com"><i data-lucide="mail"></i> aligntrarecruiters@gmail.com</a>
+          </div>
         </div>
         <div class="footer-col">
           <h5>Company</h5>
@@ -1543,6 +1604,10 @@
       }
     })();
   </script>
+
+  <!-- ─── LUCIDE ICONS ─── -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
 
 </body>
 </html>
